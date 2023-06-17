@@ -20,4 +20,6 @@ export const setupSocket = (server: http.Server<typeof http.IncomingMessage, typ
     setInterval(() => {
         console.log(`[health check] io has ${io.engine.clientsCount} connected clients`);
     }, 15000);
+
+    return io;
 }

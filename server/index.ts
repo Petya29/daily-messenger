@@ -1,6 +1,7 @@
 import cors from "cors";
 import express from "express";
 import http from "http";
+import errorHandler from "./middleware/error-handling.middleware";
 import { setupSocket } from "./socket/setup-socket";
 
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(errorHandler);
 
 const server = http.createServer(app);
 
