@@ -1,8 +1,11 @@
+import * as dotenv from 'dotenv';
 import cors from "cors";
 import express from "express";
 import http from "http";
 import errorHandler from "./middleware/error-handling.middleware";
 import { setupSocket } from "./socket/setup-socket";
+
+dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
