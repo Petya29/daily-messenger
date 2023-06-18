@@ -13,7 +13,7 @@ class ConversationService {
 
 		return {
 			conversation: newConversation,
-			users: [senderId, receiverId],
+			members: [senderId, receiverId],
 		};
 	}
 
@@ -37,7 +37,15 @@ class ConversationService {
 				},
 			},
 			include: {
-				members: true,
+				members: {
+					include: {
+						user: {
+							select: {
+								nickname: true,
+							},
+						},
+					},
+				},
 			},
 		});
 	}
@@ -60,7 +68,7 @@ class ConversationService {
 
 		return {
 			conversation: conversation,
-			users: [senderId, receiverId],
+			members: [senderId, receiverId],
 		};
 	}
 }

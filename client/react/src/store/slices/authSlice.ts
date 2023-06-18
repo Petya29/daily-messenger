@@ -30,6 +30,7 @@ export const authSlice = createSlice({
 		setUser(state, actions: PayloadAction<User>) {
 			state.isAuth = true;
 			state.user = actions.payload;
+			state.isAuthChecking = false;
 		},
 	},
 });
