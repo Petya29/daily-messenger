@@ -11,19 +11,19 @@ datasource db {
 }
 
 model User {
-  id                   String                 @id @default(uuid())
+  id                   String                @id @default(uuid())
   nickname             String
-  email                String                 @unique
+  email                String                @unique
   password             String
-  role                 Role                   @default(USER)
-  isActivated          Boolean                @default(false)
+  role                 Role                  @default(USER)
+  isActivated          Boolean               @default(false)
   activationLink       String?
   region               String
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @default(now()) @updatedAt
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @default(now()) @updatedAt
   refreshToken         Token[]
   messages             Message[]
-  ConversationsOnUsers ConversationsOnUsers[]
+  conversationsMembers ConversationMembers[]
 }
 
 model Token {
@@ -38,14 +38,14 @@ model Token {
 }
 
 model Conversation {
-  id                   String                 @id @default(uuid())
-  messages             Message[]
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @default(now()) @updatedAt
-  ConversationsOnUsers ConversationsOnUsers[]
+  id        String                @id @default(uuid())
+  messages  Message[]
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @default(now()) @updatedAt
+  members   ConversationMembers[]
 }
 
-model ConversationsOnUsers {
+model ConversationMembers {
   userId         String
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   conversationId String

@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
 import errorHandler from "./middleware/error-handling.middleware";
+import router from './routes';
 import { setupSocket } from "./socket/setup-socket";
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use('/api/v1/', router);
 app.use(errorHandler);
 
 const server = http.createServer(app);
