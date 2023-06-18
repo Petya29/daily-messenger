@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
-import cors from "cors";
 import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import http from "http";
 import errorHandler from "./middleware/error-handling.middleware";
 import { setupSocket } from "./socket/setup-socket";
@@ -17,6 +18,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(errorHandler);
 
 const server = http.createServer(app);
