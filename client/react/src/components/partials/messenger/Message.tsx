@@ -5,7 +5,10 @@ type MessageProps = {
 export const Message = ({ isOwnMessage = false }: MessageProps) => {
 	return (
 		<div
-			className={["flex flex-col mt-5", isOwnMessage ? "items-end" : ""]
+			className={[
+				"flex flex-col mt-5",
+				isOwnMessage ? "items-end ml-5" : "",
+			]
 				.join(" ")
 				.trim()}
 		>

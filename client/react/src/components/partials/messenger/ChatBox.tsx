@@ -2,7 +2,7 @@ import { Message } from "./Message";
 
 export const ChatBox = () => {
 	return (
-		<div className="basis-1/2 mx-5">
+		<div className="basis-11/12 mx-5">
 			<div className="h-[88%] overflow-y-scroll pr-2">
 				<Message />
 				<Message isOwnMessage />
