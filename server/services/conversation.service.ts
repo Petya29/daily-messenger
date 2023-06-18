@@ -1,7 +1,7 @@
 import prisma from "../prisma/prisma";
 
 class ConversationService {
-	async createConversation(senderId: string, receiverId: string) {
+	async findOrCreate(senderId: string, receiverId: string) {
 		const newConversation = await prisma.conversation.create({ data: {} });
 
 		await prisma.conversationMembers.createMany({

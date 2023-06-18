@@ -11,7 +11,7 @@ class ConversationController {
 
 			if (potentialConversation) return res.json(potentialConversation);
 
-			const newConversation = await ConversationService.createConversation(
+			const newConversation = await ConversationService.findOrCreate(
 				senderId,
 				receiverId
 			);
