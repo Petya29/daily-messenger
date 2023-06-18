@@ -11,17 +11,19 @@ datasource db {
 }
 
 model User {
-  id               String             @id @default(uuid())
-  nickname         String
-  email            String             @unique
-  password         String
-  role             Role               @default(USER)
-  isActivated      Boolean            @default(false)
-  activationLink   String?
-  region           String
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @default(now()) @updatedAt
-  refreshToken     Token[]
+  id                   String                 @id @default(uuid())
+  nickname             String
+  email                String                 @unique
+  password             String
+  role                 Role                   @default(USER)
+  isActivated          Boolean                @default(false)
+  activationLink       String?
+  region               String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now()) @updatedAt
+  refreshToken         Token[]
+  messages             Message[]
+  ConversationsOnUsers ConversationsOnUsers[]
 }
 
 model Token {
@@ -31,6 +33,38 @@ model Token {
   refreshToken String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now()) @updatedAt
+
+  @@index([userId])
+}
+
+model Conversation {
+  id                   String                 @id @default(uuid())
+  messages             Message[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now()) @updatedAt
+  ConversationsOnUsers ConversationsOnUsers[]
+}
+
+model ConversationsOnUsers {
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now()) @updatedAt
+
+  @@id([userId, conversationId])
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  text           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now()) @updatedAt
 }
 
 enum Role {
