@@ -8,7 +8,6 @@ class ConversationController {
 
 			const potentialConversation =
 				await ConversationService.isConversationExist(senderId, receiverId);
-
 			if (potentialConversation) return res.json(potentialConversation);
 
 			const newConversation = await ConversationService.findOrCreate(

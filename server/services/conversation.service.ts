@@ -51,25 +51,25 @@ class ConversationService {
 	}
 
 	async isConversationExist(senderId: string, receiverId: string) {
-		const connection = await prisma.conversationMembers.findFirst({
-			where: {
-				userId: {
-					in: [senderId, receiverId],
+		const connections = await prisma.conversation.findMany({
+			include: {
+				members: {
+					where: {
+						userId: {
+							in: [senderId, receiverId],
+						},
+					},
 				},
 			},
 		});
-		if (!connection) return null;
 
-		const conversation = await prisma.conversation.findUnique({
-			where: {
-				id: connection.conversationId,
-			},
-		});
+		for (let i = 0; i < connections.length; i++) {
+			if (connections[i].members.length >= 2) {
+				return connections[i];
+			}
+		}
 
-		return {
-			conversation: conversation,
-			members: [senderId, receiverId],
-		};
+		return null;
 	}
 }
 

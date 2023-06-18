@@ -12,7 +12,7 @@ export const ChatMenu = () => {
 
 	return (
 		<div className="basis-1/3">
-			<div className="mt-5">
+			<div className="flex flex-col gap-[2px] mt-5">
 				{conversations.map((conversation) => (
 					<Conversation
 						{...(getMember(
