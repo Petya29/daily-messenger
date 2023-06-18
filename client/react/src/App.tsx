@@ -1,6 +1,6 @@
 import { setupSocket } from "./lib/socket"
 
-export const socket = setupSocket();
+//export const socket = setupSocket();
 
 function App() {
   return (
