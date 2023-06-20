@@ -5,6 +5,10 @@ type MessageProps = {
 	isOwnMessage?: boolean;
 };
 
+const formatMessageTime = (dateString: string): string => {
+	return new Date(dateString).toTimeString().slice(0, 5);
+}
+
 export const Message = ({ message, isOwnMessage = false }: MessageProps) => {
 	return (
 		<div
@@ -30,7 +34,7 @@ export const Message = ({ message, isOwnMessage = false }: MessageProps) => {
 						.trim()}
 				>
 					{message.text}
-					<div className="text-right text-xs">3:53 PM</div>
+					<div className="text-right text-xs">{formatMessageTime(message.createdAt)}</div>
 				</span>
 			</div>
 		</div>
