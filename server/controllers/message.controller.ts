@@ -30,7 +30,10 @@ class MessageController {
 				conversationId
 			);
 
-			return res.json(messages);
+			return res.json({
+				conversationId: conversationId,
+				messages: messages
+			});
 		} catch (e) {
 			next(e);
 		}

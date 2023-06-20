@@ -22,6 +22,7 @@ export interface Token {
 export interface Conversation {
 	id: string;
 	members: ConversationMember[];
+	messages: Message[];
 	createdAt: string;
 	updatedAt: string;
 }
@@ -30,6 +31,15 @@ export interface ConversationMember {
 	userId: string;
 	conversationId: string;
 	user: Pick<User, "nickname">;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface Message {
+	id: string;
+	userId: string;
+	conversationId: string;
+	text: string;
 	createdAt: string;
 	updatedAt: string;
 }
