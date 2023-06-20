@@ -1,8 +1,11 @@
+import { Message as IMessage } from "../../../models/entities";
+
 type MessageProps = {
+	message: IMessage;
 	isOwnMessage?: boolean;
 };
 
-export const Message = ({ isOwnMessage = false }: MessageProps) => {
+export const Message = ({ message, isOwnMessage = false }: MessageProps) => {
 	return (
 		<div
 			className={[
@@ -26,7 +29,7 @@ export const Message = ({ isOwnMessage = false }: MessageProps) => {
 						.join(" ")
 						.trim()}
 				>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					{message.text}
 					<div className="text-right text-xs">3:53 PM</div>
 				</span>
 			</div>
